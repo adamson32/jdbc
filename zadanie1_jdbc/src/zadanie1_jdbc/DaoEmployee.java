@@ -100,5 +100,39 @@ public class DaoEmployee {
         System.out.println();
     } 
      
-    
+    public Employee getEmployeeByID(int prac_id)
+    {
+        try {
+            String query ="select * from pracownicy where prac_id="+prac_id;
+            Employee p = new Employee();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+             p.setPracId(rs.getInt("prac_id"));
+             p.setPracImie(rs.getString("prac_imie"));
+             p.setPracNazwisko(rs.getString("prac_nazwisko"));
+             p.setPracWiek(rs.getInt("prac_wiek"));
+             p.setPracNrTelefonu(rs.getString("prac_nr_telefonu"));
+             p.setPracEmail(rs.getString("prac_email"));
+            return p;
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+     
+     
+      public Employee dropEmployeeByID(int prac_id)
+    {
+        try {
+            String query ="delete from pracownicy where prac_id="+prac_id;
+            
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
 }
