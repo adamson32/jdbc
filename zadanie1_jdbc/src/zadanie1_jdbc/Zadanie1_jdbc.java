@@ -28,6 +28,8 @@ public class Zadanie1_jdbc {
         String s="outlook.com";
         System.out.println("Pracownicy, których email kończy się na: outlook.com");
         dao.getEmployeesByEmail(s);
+        dao.close();
+        
     }
     
 }
