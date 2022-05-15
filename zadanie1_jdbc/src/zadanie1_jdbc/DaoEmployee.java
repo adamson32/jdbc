@@ -135,4 +135,43 @@ public class DaoEmployee {
         }
         return null;
     }
+      
+      public List<Employee> getEmployeesByEmail_List(String s) throws SQLException
+     {
+       
+         
+         String query = "select * from pracownicy where prac_email like '%"+s+"'";
+         List<Employee> list = new ArrayList<Employee>();
+         Employee p=null;
+         Statement st = con.createStatement();
+         ResultSet rs = st.executeQuery(query);
+         while (rs.next())
+         {
+             p=new Employee();
+             p.setPracId(rs.getInt("prac_id"));
+             p.setPracImie(rs.getString("prac_imie"));
+             p.setPracNazwisko(rs.getString("prac_nazwisko"));
+             p.setPracWiek(rs.getInt("prac_wiek"));
+             p.setPracNrTelefonu(rs.getString("prac_nr_telefonu"));
+             p.setPracEmail(rs.getString("prac_email"));
+             list.add(p);
+         }
+         return list;
+         
+        
+     }
+     
+       public void getEmployeesByEmail(String s) {
+       
+        List<Employee> employee;
+        try {
+            employee =getEmployeesByEmail_List(s);
+            for (Employee p : employee) {
+                displayEmployee(p);
+                //System.out.println(employee);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }       
+    }
 }
